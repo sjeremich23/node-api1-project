@@ -1,28 +1,23 @@
-/* eslint-disable no-shadow */
 /* eslint-disable no-unused-expressions */
-/* eslint-disable no-console */
-// implement your API here
 const express = require("express");
-const cors = require("cors");
+const CORS = require("cors");
 const db = require("./data/db");
 
 const server = express();
-const port = 4000;
-// eslint-disable-next-line no-console
-server.listen(port, () => console.log(`\n ** API running on ${port} **\n`));
-
-server.use(express.json());
-server.use(cors());
-
-server.get("/", (req, res) => {
-  res.send({ api: "up and running..." });
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`\n ** API running on ${PORT} **\n`);
 });
 
-/**
-|--------------------------------------------------
-| GET User Database
-|--------------------------------------------------
-*/
+server.use(express.json());
+server.use(CORS());
+
+server.get("/", (req, res) => {
+  res.send({
+    Server: "Hi, I'm your Server.  Can I start you off with a drink?"
+  });
+});
+
 server.get("/api/users", (req, res) => {
   db.find()
     .then(user => {
@@ -36,11 +31,6 @@ server.get("/api/users", (req, res) => {
     });
 });
 
-/**
-|--------------------------------------------------
-| GET User ID
-|--------------------------------------------------
-*/
 server.get("/api/users/:id", (req, res) => {
   const { id } = req.params;
   db.findById(id).then(user => {
@@ -52,11 +42,6 @@ server.get("/api/users/:id", (req, res) => {
   });
 });
 
-/**
-|--------------------------------------------------
-| POST Users
-|--------------------------------------------------
-*/
 server.post("/api/users", (req, res) => {
   const { body } = req;
   !body.name || !body.bio
@@ -76,11 +61,6 @@ server.post("/api/users", (req, res) => {
         });
 });
 
-/**
-|--------------------------------------------------
-| DELETE Users
-|--------------------------------------------------
-*/
 server.delete("/api/users/:id", (req, res) => {
   const { id } = req.params;
   db.remove(id)
@@ -101,11 +81,6 @@ server.delete("/api/users/:id", (req, res) => {
     });
 });
 
-/**
-|--------------------------------------------------
-| PUT Update Users
-|--------------------------------------------------
-*/
 server.put("/api/users/:id", (req, res) => {
   const { id } = req.params;
   const { body } = req;

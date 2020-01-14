@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./userList.css";
+import "./user-list.css";
 import Family from "./family.jpg";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [render, setRender] = useState(false);
   const [newUser, setNewUser] = useState({ name: "", bio: "" });
-  const url = "http://localhost:4000/api/users/";
+  const api = "http://localhost:4000/api/users/";
 
   useEffect(() => {
     axios
-      .get(url)
+      .get(api)
       .then(res => {
         setUsers(res.data);
       })
@@ -22,7 +22,7 @@ const UserList = () => {
 
   const addUser = () => {
     axios
-      .post(url, newUser)
+      .post(api, newUser)
       .then(() => {
         setNewUser({ name: "", bio: "" });
         setRender(!render);
@@ -34,7 +34,7 @@ const UserList = () => {
 
   const deleteUser = id => {
     axios
-      .delete(`${url}${id}`)
+      .delete(`${api}${id}`)
       .then(() => {
         setRender(!render);
       })
@@ -65,10 +65,11 @@ const UserList = () => {
           name="bio"
           placeholder="Bio"
           onChange={handleChange}
-          value={newUser.age}
+          value={newUser.bio}
         />
 
         <button type="submit">Submit</button>
+        <h1>My Family</h1>
       </form>
 
       <div className="users">
