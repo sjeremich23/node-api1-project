@@ -3,6 +3,7 @@
 /* eslint-disable no-console */
 // implement your API here
 const express = require("express");
+const cors = require("cors");
 const db = require("./data/db");
 
 const server = express();
@@ -11,6 +12,7 @@ const port = 4000;
 server.listen(port, () => console.log(`\n ** API running on ${port} **\n`));
 
 server.use(express.json());
+server.use(cors());
 
 server.get("/", (req, res) => {
   res.send({ api: "up and running..." });
