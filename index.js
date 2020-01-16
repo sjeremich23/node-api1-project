@@ -9,6 +9,9 @@ server.listen(PORT, () => {
   console.log(`\n ** API running on ${PORT} **\n`);
 });
 
+console.log(process.env.SECRET_MESSAGE);
+console.log(process.env.TOKEN);
+
 server.use(express.json());
 server.use(CORS());
 
