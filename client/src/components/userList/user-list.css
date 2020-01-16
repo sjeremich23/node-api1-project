@@ -1,0 +1,35 @@
+form {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+form button {
+  width: 100px;
+}
+
+.users {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 1%;
+  position: relative;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+.delete {
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  color: darkred;
+}
+
+.delete:hover {
+  cursor: pointer;
+  color: red;
+}
